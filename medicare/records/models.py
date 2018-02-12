@@ -38,7 +38,6 @@ class Patient(models.Model):
     evening_phone = models.CharField(max_length=10)
 
     insurance = models.CharField(max_length=250)
-    doctor = models.CharField(max_length=50) # models.ForeignKey('Doctor', on_delet=models.CASCADE)
 
     def __str__(self):
         return  '{}, {}'.format(self.last_name, self.first_name)
@@ -74,6 +73,7 @@ class Appointment(models.Model):
     appointment_date = models.DateField(choices=DATE)
     appointment_time = models.TimeField(choices=TIME)
     visit_reason = models.CharField(max_length=150)
+    doctor = models.ForeignKey('employees.Employee', on_delete=models.CASCADE, default='none')
 
     class Meta:
         # cant make multiple appointments for same date and time

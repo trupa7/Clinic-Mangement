@@ -8,8 +8,8 @@ class PatientAdmin(admin.ModelAdmin):
     list_display = ['last_name', 'first_name', 'middle_name','sex', 'insurance',
                     'address', 'city', 'state', 'zip', 'email',
                     'day_phone', 'evening_phone']
-    list_filter = ['last_name', 'doctor', 'sex', 'insurance']
-    prepopulated_fields = {'last_name': ('doctor',)}
+    list_filter = ['last_name', 'first_name', 'sex', 'insurance']
+
 
 
 class HistoryAdmin(admin.ModelAdmin):

@@ -1,0 +1,18 @@
+{% extends 'employees.html' %}
+{% block content %}
+<div>
+
+    <form action="{% url 'employees:deleteemployee' %}" method="get">{% csrf_token %}
+
+    <select name="employees">
+        <option>employees</option>
+        {% for p in employees %}
+        <option value="{{ p }}">{{ p }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="select" />
+
+
+</div>
+
+{% endblock %}

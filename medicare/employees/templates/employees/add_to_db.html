@@ -1,0 +1,16 @@
+{% extends 'employees.html' %}
+
+
+{% block content %}
+<div>
+
+    <form method="POST" >{% csrf_token %}
+        {{ record.as_p }}
+        <button type="submit">confirm</button>
+    </form>
+
+
+</div>
+
+
+{% endblock %}
