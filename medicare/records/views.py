@@ -155,5 +155,4 @@ def update_history(request, appointment_id):
 
 
     name = Patient.objects.get(id=appointment.patient_id)
-    print('############\n',name ,prescription, prescribed, notes, prescript,'\n############')
     return render(request, 'records/custom_form.html',{"name":name})

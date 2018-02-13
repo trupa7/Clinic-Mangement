@@ -91,3 +91,6 @@ class CompleteAppointment(models.Model):
     appointment_time = models.TimeField()
     visit_reason = models.CharField(max_length=150)
     doctor = models.ForeignKey('employees.Employee', on_delete=models.CASCADE, default='none')
+
+    class Meta:
+        ordering = ('appointment_date','appointment_time',)
