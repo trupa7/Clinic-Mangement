@@ -1,0 +1,30 @@
+{% extends 'front_desk.html' %}
+
+
+{% block content %}
+<div>
+
+    <table>{{ name }}
+        <tr>
+            <th>date</th>
+            <th>time</th>
+            <th>prescription</th>
+            <th>prescribed</th>
+            <th>visit record</th>
+        </tr>
+        {% for h  in history %}
+
+                <tr>
+                    <td>{{ h.appointment.appointment_date }}</td>
+                    <td>{{ h.appointment.appointment_time }}</td>
+                    <td>{{ h.prescription }}</td>
+                    <td>{{ h.prescribed }}</td>
+                    <td>{{ h.visit_record }}</td>
+
+                </tr>
+        {% endfor %}
+    </table>
+
+</div>
+
+{% endblock %}

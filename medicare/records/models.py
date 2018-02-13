@@ -48,7 +48,7 @@ class History(models.Model):
         ('y', 'yes'),
         ('n', 'no')
     )
-    appointment = models.ForeignKey('Appointment', on_delete=models.CASCADE, )
+    appointment = models.OneToOneField('Appointment', on_delete=models.CASCADE)
     prescription = models.CharField(max_length=1, choices=PRESCRIPTION,)
     prescribed = models.CharField(max_length=150)
     record_date = models.DateTimeField(auto_now=datetime)
@@ -56,7 +56,6 @@ class History(models.Model):
 
     def __str__(self):
         return str(self.appointment)
-
 
 class Appointment(models.Model):
     DATE = [] # set days to select
@@ -78,7 +77,7 @@ class Appointment(models.Model):
     class Meta:
         # cant make multiple appointments for same date and time
         unique_together = (('appointment_date', 'appointment_time'),)
-        ordering = ('appointment_date',)
+        ordering = ('appointment_date','appointment_time',)
         verbose_name = 'appointment'
         verbose_name_plural = 'appointments'
 
