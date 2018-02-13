@@ -4,9 +4,9 @@ from django.db import models
 
 class Employee(models.Model):
     SL = (
-        ('dr', 'Doctor'),
-        ('fd', 'Front Desk'),
-        ('nr', 'Nurse')
+        ('Dr.', 'Doctor'),
+        ('Front Desk', 'Front Desk'),
+        ('Nurse', 'Nurse')
         )
 
     first_name = models.CharField(max_length=100)

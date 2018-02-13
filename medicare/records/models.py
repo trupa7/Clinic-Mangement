@@ -7,8 +7,8 @@ from django.db import models
 
 class Patient(models.Model):
     SEX = (
-        ('m', 'male'),
-        ('f', 'female')
+        ('M', 'Male'),
+        ('F', 'Female')
     )
 
     STATES = (
