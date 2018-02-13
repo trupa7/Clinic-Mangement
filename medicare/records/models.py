@@ -48,7 +48,7 @@ class History(models.Model):
         ('y', 'yes'),
         ('n', 'no')
     )
-    appointment = models.OneToOneField('Appointment', on_delete=models.CASCADE)
+    appointment = models.OneToOneField('CompleteAppointment', on_delete=models.CASCADE)
     prescription = models.CharField(max_length=1, choices=PRESCRIPTION,)
     prescribed = models.CharField(max_length=150)
     record_date = models.DateTimeField(auto_now=datetime)
@@ -83,3 +83,11 @@ class Appointment(models.Model):
 
     def __str__(self):
         return '{} {}, {}'.format(str(self.patient), self.appointment_time, self.appointment_date)
+
+
+class CompleteAppointment(models.Model):
+    patient = models.ForeignKey('Patient', on_delete=models.CASCADE)
+    appointment_date = models.DateField()
+    appointment_time = models.TimeField()
+    visit_reason = models.CharField(max_length=150)
+    doctor = models.ForeignKey('employees.Employee', on_delete=models.CASCADE, default='none')

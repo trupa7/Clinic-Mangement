@@ -1,0 +1,17 @@
+{% extends 'front_desk.html' %}
+
+
+{% block content %}
+<div>
+    <form  method="get" >
+        <fieldset>
+            <legend>{{ name }}</legend>
+            <input type="checkbox" name="precription">Prescription<br>
+            Medication<input type="text" name="medication"><br>
+            Notes<textarea rows="4" cols="50" name="notes" ></textarea><br>
+            <input type="submit" value="complete">
+        </fieldset>
+    </form>
+</div>
+
+{% endblock %}

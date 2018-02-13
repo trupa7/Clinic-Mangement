@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
 from records.froms import NewPatientForm, NewAppointmentForm, NewHistoryForm
-from records.models import Appointment, History, Patient
+from records.models import Appointment, History, Patient, CompleteAppointment
 
 
 #
@@ -43,6 +43,7 @@ def new_appointment(request):
 
 
 
+'''
 # cancel appointment
 def cancel_appointment(request):
     appointments = list(Appointment.objects.all())
@@ -61,6 +62,23 @@ def cancel_appointment(request):
             break
 
     return render(request, 'records/cancel_app.html', {'appointments': appointments})
+'''
+
+# cancel appointment
+def cancel_appointment(request, appointment_id):
+    appointment = Appointment.objects.get(id=appointment_id)
+    app = CompleteAppointment(patient=appointment.patient,
+                              appointment_date=appointment.appointment_date,
+                              appointment_time=appointment.appointment_time,
+                              visit_reason=appointment.visit_reason,
+                              doctor=appointment.doctor)
+    app.save()
+    record = History(appointment=app, prescription='n', prescribed='none', visit_record='Appointment Canceled')
+    record.save()
+    Appointment.objects.filter(id=appointment.id).delete()
+
+    return appointments(request)
+
 
 
 def appointments(request):
@@ -85,31 +103,14 @@ def appointments(request):
                                                                  'future_appointments': future_appointments,
                                                                  'todays_date':todays_date})
 
-# update history
-# TODO:: new history should have appointment filled in automatically
-# TODO:: need custom method to add to table
-def new_history(request, appointment_id=None):
-    if request.method == 'POST':
-        form = NewHistoryForm(request.POST)
-        print(form)
-        if form.is_valid():
-            record = form.save(commit=False)
-            record.save()
-            return redirect('records:frontdesk')
-    else:
-        form = NewHistoryForm()
-
-    return render(request, 'records/add_to_db.html', {'record': form})
-
-
 def display_history(request, appointment_id):
     try:
         # isolate the patient and all appointments
         appointments = get_object_or_404(Appointment, pk=appointment_id)
-        # get patient name for display
         name = Patient.objects.get(id=appointments.patient_id)
+        # get patient name for display
 
-        appointment = Appointment.objects.filter(patient_id=appointments.patient_id)
+        appointment = CompleteAppointment.objects.filter(patient_id=appointments.patient_id)
         history = list(History.objects.all())
         # append the history for patient to val
         val = []
@@ -122,4 +123,37 @@ def display_history(request, appointment_id):
     except:
         raise Http404('no employee found')
 
-    return render(request, "records/display_history.html", {'name':name, 'history':val})
+    return render(request, 'records/display_history.html', {'name':name, 'history':val})
+
+def update_history(request, appointment_id):
+
+    appointment = get_object_or_404(Appointment, pk=appointment_id)
+    # get patient name for display
+
+    print(type(appointment))
+    prescription = request.GET.get('precription', None)
+    prescribed = request.GET.get('medication', '')
+    notes = request.GET.get('notes', None)
+    prescript = 'n'
+    if prescription == 'on':
+        prescript = 'y'
+    if notes:
+
+        # create history record
+        app = CompleteAppointment(patient=appointment.patient,
+                                  appointment_date=appointment.appointment_date,
+                                  appointment_time=appointment.appointment_time,
+                                  visit_reason=appointment.visit_reason,
+                                  doctor=appointment.doctor)
+        app.save()
+        record = History(appointment=app, prescription=prescript, prescribed=prescribed, visit_record=notes)
+        record.save()
+        # create complete appointment record
+        # delete from current appointment
+        Appointment.objects.filter(id=appointment.id).delete()
+        return redirect('records:frontdesk')
+
+
+    name = Patient.objects.get(id=appointment.patient_id)
+    print('############\n',name ,prescription, prescribed, notes, prescript,'\n############')
+    return render(request, 'records/custom_form.html',{"name":name})

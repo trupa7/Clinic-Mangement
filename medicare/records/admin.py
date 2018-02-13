@@ -25,5 +25,5 @@ class AppointmentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Patient, PatientAdmin)
-admin.site.register(History, HistoryAdmin)
+#admin.site.register(History, HistoryAdmin)
 admin.site.register(Appointment, AppointmentAdmin)
