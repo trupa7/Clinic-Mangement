@@ -1,0 +1,23 @@
+{% extends "login/base.html" %}
+
+{%block content%}
+    <h4> Lab Technician Dashboard </h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th> Test ID </th>
+                <th> Patient ID </th>
+            </tr>
+        </thead>
+        <tbody>
+        {{data.as_table}}
+            {% for val in data %}
+                <tr>
+                    <td> {{ val.test_id }}</td>
+                    <td> <a href= "{%  url 'lab:test_detail' val.patient_id_id%}">{{ val.patient_id}}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

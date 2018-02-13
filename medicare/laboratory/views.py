@@ -1,28 +1,34 @@
-from django.shortcuts import render
-from django.views.generic import ListView,DetailView
+from django.shortcuts import render,redirect
 from .models import Laboratory
-from django.utils import  timezone
+from .forms import TestFormSelect
+
+
 # Create your views here.
 
-class LabDetails(ListView):
-    model=Laboratory
-    template_name = "laboratory/Welcome Screen.html"
+def getAllDetails(request):
+    data = Laboratory.objects.all()
+    return render(request,'laboratory/WelcomeScreen.html',{'data':data})
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['now'] = timezone.now()
-        return context
+def getTestData(request,id):
+    labObj = Laboratory.objects.filter(patient_id_id=id)
+    return render(request,'laboratory/test_details.html',{'data':labObj})
 
-class TestDetails(DetailView):
-    model=Laboratory
-    template_name = "laboratory/test_details.html"
+def updateTestData(request):
+    val = request.POST.get('res_stat', None)
+    print("VAl-------------",val)
+    if(request.method == "POST"):
+        print("insidePPOST")
+        form = TestFormSelect()
+        if form['result_status'] != None:
+            print("inside")
+            data = form.save(commit=False)
+            data.result_status = val;
+            return redirect('lab:test_update', {'data': data})
+        else:
+            return render(request, 'laboratory/WelcomeScreen.html',{'data': Laboratory.objects.all()})
 
-    def getTestData(request,test_id):
+    #
+    # print("inside")
+    # data = Laboratory.objects.filter(result_status__contains=val)
+    #
 
-        data = Laboratory.objects.filter(test_id__contains=test_id)
-        render(request,'laboratory/test_details.html',{'data':data})
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['test_details'] = Laboratory.objects.filter(test_id__contains=kwargs)
-    #     return context

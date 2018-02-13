@@ -1,6 +1,8 @@
 from django import forms
 from .models import Laboratory
 
-class LabDetailsForm(forms.ModelForm):
-    model = Laboratory
-    fields = ('test_id','patient_id','test_date','doctor_id','result_status','test_details')
+
+class TestFormSelect(forms.ModelForm):
+    class Meta:
+        model = Laboratory
+        fields = ('result_status','patient_id','doctor_id','test_date','test_id','test_details',)

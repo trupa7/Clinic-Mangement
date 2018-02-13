@@ -1,5 +1,48 @@
-{% extends 'laboratory/base.html' %}
-{% block content %}
-Test ID : {{ laboratory.test_id }}
-Test Description : {{ laboratory.test_details }}
+{% extends "login/base.html" %}
+{% block content%}
+    <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th> Test Details </th>
+            <th> Tested On </th>
+            <th> Doctor ID </th>
+            <th> Status </th>
+            <th>Update Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for val in data %}
+                <tr>
+                    <td> {{ val.test_details }}</td>
+                    <td> {{ val.test_date}}</a></td>
+                    <td> {{ val.doctor_id }}   </td>
+                    <td> {{ val.result_status }} </td>
+                    <form method="POST" action="{% url 'lab:test_update'%}">
+                        {% csrf_token %}
+                        {% if val.result_status == 'Pending' %}
+                        <td>
+                            <select>
+                                <option>Completed</option>
+                            </select>
+                        </td>
+                        {% elif val.result_status == 'Completed' %}
+                        <td></td>
+                        {% else %}
+                        <td>
+                            <select name="res_stat">
+                                <option value="None">-------</option>
+                                <option value="Started">Started</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                            <input type="submit" name="button"  value="Submit"></input>
+                        </td>
+                        {% endif %}
+                    </form>
+                </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
 {% endblock %}
