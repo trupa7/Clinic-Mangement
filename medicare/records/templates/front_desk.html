@@ -1,0 +1,29 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        {% load static %}
+        <link href="{% static 'css/normalize.css' %}" rel="stylesheet" />
+        <link href="{% static 'css/#' %}" rel="stylesheet" />
+        <title>Title</title>
+    </head>
+    <body>
+        <header>
+            <h1>{{ title }}</h1>
+              <nav>
+                <ul>
+                    <li><a href="{% url 'records:frontdesk' %}">front desk</a></li>
+                    <li><a href="{% url 'records:newpatient' %}">new patient</a></li>
+                    <li><a href="{% url 'records:newappointment' %}">new appointment </a></li>
+                    <li><a href="{% url 'records:appointments' %}">appointments</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        {% block content %}
+        {% endblock %}
+
+    </body>
+</html>

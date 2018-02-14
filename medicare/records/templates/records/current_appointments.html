@@ -1,0 +1,52 @@
+{% extends 'front_desk.html' %}
+
+
+{% block content %}
+<div>
+
+    <table>{{ todays_date }} Appointments
+        <tr>
+            <th>appointment time</th>
+            <th>patient</th>
+            <th>visit reason</th>
+            <th>doctor</th>
+        </tr>
+        {% for a  in todays_appointments %}
+
+                <tr>
+                    <td>{{ a.appointment_time }}</td>
+                    <td><a href="{% url 'records:displayhistory' a.id %}">{{ a.patient }}</a></td>
+                    <td>{{ a.visit_reason }}</td>
+                    <td>{{ a.doctor }}</td>
+                    <td><a href="{% url 'records:updatehistory' a.id %}">Update</a></td>
+                    <td><a href="#">Lab</a></td>
+                    <td><a href="{% url 'records:cancelapp' a.id %}">Cancel</a></td>
+                </tr>
+        {% endfor %}
+    </table>
+    <table>
+        <tr>
+            <th>appointment date</th>
+            <th>appointment time</th>
+            <th>patient</th>
+            <th>visit reason</th>
+            <th>doctor</th>
+        </tr>
+        {% for a  in future_appointments %}
+            <tr>
+                <td>{{ a.appointment_date }}</td>
+                <td>{{ a.appointment_time }}</td>
+                <td><a href="{% url 'records:displayhistory' a.id %}">{{ a.patient }}</a></td>
+                <td>{{ a.visit_reason }}</td>
+                <td>{{ a.doctor }}</td>
+                <td><a href="{% url 'records:updatehistory' a.id %}">Update</a></td>
+                <td><a href="#">Lab</a></td>
+                <td><a href="{% url 'records:cancelapp' a.id %}">Cancel</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "login/base.html" %}
+{% block content %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th> ID </th>
+                <th> Patient Name </th>
+                <th> Prescription ID </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                <td>{{i.id}}</td>
+                <td>{{i.name}}</td>
+                <td><a href = "{% url 'pharmacy:pres_detail' i.prescription_id_id%}">{{i.prescription_id_id}}</a></td>
+                <form method="post" action="{% url 'pharmacy:del_detail' i.prescription_id_id%}">
+                    {%csrf_token%}
+                    <td><input type="submit" name="button"  value="Submit"></td>
+                </form>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

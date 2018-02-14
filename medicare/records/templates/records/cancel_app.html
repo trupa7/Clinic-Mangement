@@ -1,0 +1,18 @@
+{% extends 'front_desk.html' %}
+{% block content %}
+<div>
+
+    <form action="{% url 'records:cancelapp' %}" method="get">{% csrf_token %}
+
+    <select name="patient">
+        <option>patients</option>
+        {% for p in appointments %}
+        <option value="{{ p }}">{{ p }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="select" />
+
+
+</div>
+
+{% endblock %}

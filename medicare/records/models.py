@@ -1,6 +1,9 @@
 from datetime import date, datetime, time, timedelta
 from django.db import models
+<<<<<<< HEAD
 from pymongo.read_preferences import Primary
+=======
+>>>>>>> bf50983dee3fcf5b70e95b4bb430d7795e532408
 
 
 # Create your models here.
@@ -8,8 +11,13 @@ from pymongo.read_preferences import Primary
 
 class Patient(models.Model):
     SEX = (
+<<<<<<< HEAD
         ('m', 'male'),
         ('f', 'female')
+=======
+        ('M', 'Male'),
+        ('F', 'Female')
+>>>>>>> bf50983dee3fcf5b70e95b4bb430d7795e532408
     )
 
     STATES = (
@@ -49,7 +57,11 @@ class History(models.Model):
         ('y', 'yes'),
         ('n', 'no')
     )
+<<<<<<< HEAD
     appointment = models.ForeignKey('Appointment', on_delete=models.CASCADE, )
+=======
+    appointment = models.OneToOneField('CompleteAppointment', on_delete=models.CASCADE)
+>>>>>>> bf50983dee3fcf5b70e95b4bb430d7795e532408
     prescription = models.CharField(max_length=1, choices=PRESCRIPTION,)
     prescribed = models.CharField(max_length=150)
     record_date = models.DateTimeField(auto_now=datetime)
@@ -58,7 +70,10 @@ class History(models.Model):
     def __str__(self):
         return str(self.appointment)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> bf50983dee3fcf5b70e95b4bb430d7795e532408
 class Appointment(models.Model):
     DATE = [] # set days to select
     TIME = [] # set time to select
@@ -79,13 +94,18 @@ class Appointment(models.Model):
     class Meta:
         # cant make multiple appointments for same date and time
         unique_together = (('appointment_date', 'appointment_time'),)
+<<<<<<< HEAD
         ordering = ('appointment_date',)
+=======
+        ordering = ('appointment_date','appointment_time',)
+>>>>>>> bf50983dee3fcf5b70e95b4bb430d7795e532408
         verbose_name = 'appointment'
         verbose_name_plural = 'appointments'
 
     def __str__(self):
         return '{} {}, {}'.format(str(self.patient), self.appointment_time, self.appointment_date)
 
+<<<<<<< HEAD
 class Rooms(models.Model):
     AVAILABLITY = (
         ('y', 'yes'),
@@ -103,3 +123,15 @@ class Admit(models.Model):
     
     def __str__(self):
         return '{}'.format(str(self.patient_id))
+=======
+
+class CompleteAppointment(models.Model):
+    patient = models.ForeignKey('Patient', on_delete=models.CASCADE)
+    appointment_date = models.DateField()
+    appointment_time = models.TimeField()
+    visit_reason = models.CharField(max_length=150)
+    doctor = models.ForeignKey('employees.Employee', on_delete=models.CASCADE, default='none')
+
+    class Meta:
+        ordering = ('appointment_date','appointment_time',)
+>>>>>>> bf50983dee3fcf5b70e95b4bb430d7795e532408

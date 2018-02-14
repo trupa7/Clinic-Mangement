@@ -41,12 +41,15 @@ INSTALLED_APPS = [
     'login',
     'records',
     'employees',
+<<<<<<< HEAD
     'nurses',
     'laboratory',
     'pharmacist',
     'doctors',
     
     
+=======
+>>>>>>> bf50983dee3fcf5b70e95b4bb430d7795e532408
 ]
 
 
@@ -65,7 +68,7 @@ ROOT_URLCONF = 'medicare.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR,],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,8 +136,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+<<<<<<< HEAD
 STATICFILES_DIRS = [
         STATIC_DIR,
     ]
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+=======
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+    '/var/www/static/',
+]
+>>>>>>> bf50983dee3fcf5b70e95b4bb430d7795e532408

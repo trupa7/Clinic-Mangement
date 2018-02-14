@@ -1,0 +1,44 @@
+{% extends 'laboratory\base.html' %}
+{% block content %}
+    <div class=""></div>
+    <h4 > Lab Technician Dashboard </h4>
+    <div id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="card">
+            <div class="card-header" role="tab" id="headingOne">
+                <h5 class="mb-0">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Current Appointments
+                    </a>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                <div class="card-block">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th> Test ID </th>
+                                <th> Patient ID </th>
+                                <th> Created Date </th>
+                                <th> Doctor ID </th>
+                                <th> Result Status </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% csrf_token %}
+                            {% for val in laboratory_list %}
+                                <tr>
+                                    <td> <a href="{% url 'test' val.test_id %}">{{ val.test_id }}</a>    </td>
+                                    <td> <a href="#">{{ val.patient_id.patient_id }} </a>   </td>
+                                    <td> {{ val.test_date }}   </td>
+                                    <td>  <a href="#">{{ val.doctor_id.doctor_id }}</a>  </td>
+                                    <td> {{ val.result_status }} </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

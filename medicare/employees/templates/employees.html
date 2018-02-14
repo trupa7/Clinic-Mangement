@@ -1,0 +1,30 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        {% load static %}
+        <link href="{% static 'css/normalize.css' %}" rel="stylesheet" />
+        <link href="{% static 'css/#' %}" rel="stylesheet" />
+        <title>Title</title>
+    </head>
+    <body>
+        <header>
+            <h1>{{ title }}</h1>
+              <nav>
+                <ul>
+                    <li><a href="{% url 'employees:employees' %}">employees</a></li>
+                    <li><a href="{% url 'employees:newemployee' %}">new employee</a></li>
+                    <li><a href="{% url 'employees:newaccount' %}">new account </a></li>
+                    <li><a href="{% url 'employees:deleteemployee' %}">delete employee </a></li>
+
+                </ul>
+            </nav>
+        </header>
+        hello world
+        {% block content %}
+        {% endblock %}
+
+    </body>
+</html>
