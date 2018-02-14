@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {% extends 'login/base.html' %}
 
 <!DOCTYPE html>
@@ -63,69 +62,3 @@
 </body>
 </html>
 
-=======
-{% extends 'login/base.html' %}
-
-<!DOCTYPE html>
-{% block content %} 
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Medicare Login</title>
-
-</head>
-<body>
-
-<div class="row content">
-    <div class="col-sm-2 sidenav">
-    </div>
-    <div class="col-sm-8 text-left" style="align-self: center;align-content: center;align-items: center;"> 
-		<h2>Login Page</h2>
-        <form class="form-horizontal" action=" {% url 'login:auth' %}" method="post" id="carform">
-       {% csrf_token %}
-    	<div class="form-group">
-      		<label class="control-label col-sm-2" for="username">Username:</label>
-      		<div class="col-xs-3">
-        		<input type="text" class="form-control" id="username" placeholder="Enter username" name="username" required>
-      		</div>
-    	</div>
-    	<div class="form-group">
-      		<label class="control-label col-sm-2" for="pwd">Password:</label>
-      		<div class="col-xs-3">          
-        		<input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" required>
-      		</div>
-    	</div>
-    	<div class="form-group">
-      		<label class="control-label col-sm-2" for="sel1">Select list (select one):</label>
-      		<div class="col-xs-3">
-	      		<select class="form-control" id="sel1" form="carform" name="sel1">
-	      		<option value="RE">Receptionist</option>
-	        	<option value="DO">Doctor</option>
-	        	<option value="NU">Nurse</option>
-	        	<option value="PH">Pharmacist</option>
-	        	<option value="LA">Lab Technician</option>
-	      		</select>
-      		</div>
-      	</div>
-    	<div class="form-group">        
-      		<div class="col-sm-offset-2 col-sm-10">
-        		<button type="submit" class="btn btn-default">Submit</button>
-      		</div>
-    	</div>
-   		<div class="form-group">        
-      		<div class="col-sm-offset-2 col-sm-10">
-      		
-        		<b style="color: red">{{error}}</b>
-      		</div>
-    	</div>
-  	</form>
-    </div>
- 
-	<div class="col-sm-2 sidenav">
-     </div>
-</div>
-{% endblock %}
-</body>
-</html>
-
->>>>>>> bf50983dee3fcf5b70e95b4bb430d7795e532408
