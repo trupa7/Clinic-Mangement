@@ -1,12 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
-<<<<<<< HEAD
 from .models import Patient, History, Appointment,Rooms,Admit
 from records.models import Admit
-=======
-from .models import Patient, History, Appointment
->>>>>>> bf50983dee3fcf5b70e95b4bb430d7795e532408
 
 
 class PatientAdmin(admin.ModelAdmin):
@@ -30,14 +26,9 @@ class AppointmentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Patient, PatientAdmin)
-<<<<<<< HEAD
 admin.site.register(History, HistoryAdmin)
 admin.site.register(Appointment, AppointmentAdmin)
 admin.site.register(Rooms)
 admin.site.register(Admit)
 
 # admin.site.register(Record)
-=======
-#admin.site.register(History, HistoryAdmin)
-admin.site.register(Appointment, AppointmentAdmin)
->>>>>>> bf50983dee3fcf5b70e95b4bb430d7795e532408
