@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from django.db import models
 from django.utils import timezone
 # Create your models here.
@@ -20,20 +19,3 @@ class Laboratory(models.Model):
     def get_pID(self):
         return self.patient_id_id
 
-=======
-from django.db import models
-
-# Create your models here.
-
-class Laboratory(models.Model):
-    test_id = models.CharField(max_length=5)
-    patient_id = models.ForeignKey('records.Patient', on_delete=models.CASCADE)
-    test_date = models.DateTimeField()
-    test_details = models.TextField()
-    result_status = models.CharField(max_length=10)
-    doctor_id = models.ForeignKey('employees.Employee', on_delete=models.CASCADE)
-
-    def get_pID(self):
-        return self.patient_id_id
-
->>>>>>> bf50983dee3fcf5b70e95b4bb430d7795e532408
