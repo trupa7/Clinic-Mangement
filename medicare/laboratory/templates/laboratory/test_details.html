@@ -1,0 +1,63 @@
+{% extends 'login/base.html' %}
+
+<!DOCTYPE html>
+
+{% block content %} 
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Medicare Test Details</title>
+
+</head>
+<body>
+{% if userid and usertype and userspec %}
+	{% if 'LA' in usertype %}
+<div class="row content">
+    <div class="col-sm-2 sidenav">
+    </div>
+    <div class="col-sm-8 text-left" > 	
+			  <h2>Test Details
+			  <ul class="nav navbar-nav navbar-right">
+   			  	<li class="dropdown"> <a  href=" {%  url 'lab:view-patient-tests' %}"><span class="glyphicon glyphicon-log-in"></span> Back</a> </li>
+   			  </ul></h2>           
+			  <table class="table table-condensed">
+			    <thead>
+			      <tr>
+			      	<th>Test id</th>
+			        <th>Test Details</th>
+			       	<th> Tested On </th>
+            		<th> Doctor ID </th>
+            		<th> Status </th>
+            		
+			      </tr>
+			    </thead>
+			    <tbody>
+			      {% if data %}
+			      {% for list in data %}
+			      <tr>
+			      	<td><a href= "{%  url 'lab:test' list.id %}">{{list.test_id}}</a></td>
+			      	<td>{{list.test_details}}</td>
+			      	<td>{{list.test_date}}</td>
+			      	<td>{{list.doctor_id}}</td>
+			      	<td>{{list.result_status}}</td>
+			   
+			      </tr>
+			      {%endfor%}
+			      {% endif %}
+			    </tbody>
+			  </table>
+			
+ 	</div>
+	<div class="col-sm-2 sidenav">
+     </div>
+</div>
+
+	{% else %}
+		<h1>404 Page Not Found</h1>
+	{% endif %}
+{% else %}
+	<h1>Login First</h1>
+{% endif %}	
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'login/base.html' %}
+
+<!DOCTYPE html>
+
+{% block content %} 
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Medicare appointment history</title>
+
+</head>
+<body>
+{% if userid and usertype and userspec %}
+	{% if 'DO' in usertype %}
+<div class="row content">
+    <div class="col-sm-2 sidenav">
+    </div>
+    <div class="col-sm-8 text-left" > 	
+			  <h2>Appointment History
+			  <ul class="nav navbar-nav navbar-right">
+   			  	<li class="dropdown"> <a  href=" {%  url 'doctors:appointments' %}"><span class="glyphicon glyphicon-log-in"></span> Back</a> </li>
+   		</ul></h2>Patient Name:{{ name }}           
+			  <table class="table table-condensed">
+			    <thead>
+			      <tr>
+			        <th>date</th>
+		            <th>time</th>
+		            <th>prescription</th>
+		            <th>prescribed</th>
+		            <th>visit record</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      {% if history %}
+			      {% for list in history %}
+			      <tr>
+			      	<td>{{ list.appointment.appointment_date }}</td>
+                    <td>{{ list.appointment.appointment_time }}</td>
+                    <td>{{ list.prescription }}</td>
+                    <td>{{ list.prescribed }}</td>
+                    <td>{{ list.visit_record }}</td>
+
+			      </tr>
+			      {%endfor%}
+			       {% endif %}
+			    </tbody>
+			  </table>
+			
+ 	</div>
+	<div class="col-sm-2 sidenav">
+     </div>
+</div>
+
+	{% else %}
+		<h1>404 Page Not Found</h1>
+	{% endif %}
+{% else %}
+	<h1>Login First</h1>
+{% endif %}	
+</body>
+</html>
+{% endblock %}

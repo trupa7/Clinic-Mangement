@@ -1,0 +1,18 @@
+.back{
+	border: 2px solid black;
+  	margin: auto;
+  	position: relative;
+  	text-align: center;
+  	top: 50%;
+  	width: 25%;  
+ 	background-color: #000080;
+ 	color:white;
+	}
+	
+h1{
+	color:red;
+}
+
+.dh{
+	color:yellow;
+}

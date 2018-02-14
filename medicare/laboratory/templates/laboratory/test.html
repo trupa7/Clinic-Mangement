@@ -1,0 +1,99 @@
+{% extends 'login/base.html' %}
+
+<!DOCTYPE html>
+
+{% block content %} 
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Medicare Update test</title>
+
+</head>
+<body>
+{% if userid and usertype and userspec %}
+	{% if 'LA' in usertype %}
+<div class="row content">
+    <div class="col-sm-2 sidenav">
+    </div>
+    <div class="col-sm-8 text-left" > 
+		<h2>Update Test</h2>
+        <form class="form-horizontal" action="{% url 'lab:test_update' %}"" method="post" id="carform">
+       {% csrf_token %}
+       {% if data %}
+	   {% for list in data %}
+	   	<div class="form-group">
+      		
+      		<div class="col-xs-3">
+        		<input type="hidden" class="form-control" id="t_id"  name="t_id" value="{{list.id}}" >
+      		</div>
+    	</div>
+    	<div class="form-group">
+      		<label class="control-label col-sm-2" for="test_id">Test id:</label>
+      		<div class="col-xs-3">
+        		<input type="text" class="form-control" id="test_id"  name="test_id" value="{{list.test_id}}" disabled="disabled">
+      		</div>
+    	</div>
+    	<div class="form-group">
+      		<label class="control-label col-sm-2" for="patient_id">Patient Name:</label>
+      		<div class="col-xs-3">          
+        		<input type="test" class="form-control" id="patient_id"  name="patient_id" value="{{list.patient_id}}" disabled="disabled" >
+      		</div>
+    	</div>
+    	<div class="form-group">
+      		<label class="control-label col-sm-2" for="doctor_id">Doctor Name:</label>
+      		<div class="col-xs-3">          
+        		<input type="test" class="form-control" id="doctor_id"  name="doctor_id" value="{{list.doctor_id}}" disabled="disabled" >
+      		</div>
+    	</div>
+    	<div class="form-group">
+      		<label class="control-label col-sm-2" for="test_date">Date:</label>
+      		<div class="col-xs-3">          
+        		<input type="test" class="form-control" id="test_date"  name="test_date" value="{{list.test_date}}" disabled="disabled" >
+      		</div>
+    	</div>
+    	<div class="form-group">
+      		<label class="control-label col-sm-2" for="sel1">Select list (select one):</label>
+      		<div class="col-xs-3">
+	      		<select class="form-control" id="result_status" form="carform" name="result_status">
+	      		<option value=" {{list.result_status}}">{{list.result_status}}</option>
+	        	<option value="P">Pending</option>
+	        	<option value="S">Started</option>
+	        	<option value="C">Completed</option>
+	        
+	      		</select>
+      		</div>
+      	</div>
+      	<div class="form-group">
+      		<label class="control-label col-sm-2" for="test_details">Details:</label>
+      		<div class="col-xs-3">          
+        		<textarea rows="10" cols="50" lass="form-control" id="test_details" name="test_details"  >{{list.test_details}}</textarea>    
+      		</div>
+    	</div>
+    	<div class="form-group">        
+      		<div class="col-sm-offset-2 col-sm-10">
+        		<button type="submit" class="btn btn-default">Submit</button>
+      		</div>
+    	</div>
+   		<div class="form-group">        
+      		<div class="col-sm-offset-2 col-sm-10">
+      		
+        		<b style="color: red">{{error}}</b>
+      		</div>
+    	</div>
+  	</form>
+    </div>
+    {%endfor%}
+    {% endif %}
+	<div class="col-sm-2 sidenav">
+     </div>
+</div>
+
+	{% else %}
+		<h1>404 Page Not Found</h1>
+	{% endif %}
+{% else %}
+	<h1>Login First</h1>
+{% endif %}	
+</body>
+</html>
+{% endblock %}

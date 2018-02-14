@@ -1,0 +1,56 @@
+{% extends 'login/base.html' %}
+
+<!DOCTYPE html>
+
+{% block content %} 
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Medicare Re Dashboard</title>
+
+</head>
+<body>
+{% if userid and usertype and userspec %}
+	{% if 'RE' in usertype %}
+<div class="row content">
+    <div class="col-sm-2 sidenav">
+    </div>
+    <div class="col-sm-8 text-left" > 	
+			  <h2>Appoinments</h2>           
+			  <table class="table table-condensed">
+			    <thead>
+			      <tr>
+			        <th>Patient Name</th>
+			        <th>Time</th>
+			        <th>Doctor's Name</th>
+			        <th>Visit Reason</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      {% if Appoinment_list %}
+			      {% for list in Appoinment_list %}
+			      <tr>
+			      	<td>{{list.patient}}</td>
+			        <td>{{list.appointment_time}}|{{list.appointment_date}}</td>
+			        <td>{{list.doctor}}</td>
+			        <td>{{list.visit_reason}}</td>
+			      </tr>
+			      {%endfor%}
+			       {% endif %}
+			    </tbody>
+			  </table>
+			
+ 	</div>
+	<div class="col-sm-2 sidenav">
+     </div>
+</div>
+
+	{% else %}
+		<h1>404 Page Not aFound</h1>
+	{% endif %}
+{% else %}
+	<h1>Login First</h1>
+{% endif %}	
+</body>
+</html>
+{% endblock %}

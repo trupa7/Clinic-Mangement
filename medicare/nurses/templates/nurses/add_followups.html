@@ -1,0 +1,68 @@
+{% extends 'login/base.html' %}
+
+<!DOCTYPE html>
+
+{% block content %} 
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Medicare Add New Followups</title>
+
+</head>
+<body>
+{% if userid and usertype and userspec %}
+	{% if 'NU' in usertype %}
+<div class="row content">
+    <div class="col-sm-2 sidenav">
+    </div>
+    <div class="col-sm-8 text-left" > 
+		<h2>Add Follow ups
+		<ul class="nav navbar-nav navbar-right">
+   			  	<li class="dropdown"> <a  href=" {%  url 'nurses:frontdesk' %}"><span class="glyphicon glyphicon-log-in"></span> Back</a> </li>
+   		</ul>
+        </h2>
+		 {% for list in patient_name%}
+        <form class="form-horizontal" action="{% url 'nurses:authfollowup' %}" method="POST" id="carform">
+      	 {% csrf_token %}
+		<div class="form-group">
+      		<label class="control-label col-sm-2">Patient name:</label>
+      		<div class="col-xs-3">
+        		<input type="hidden" class="form-control" id="paitent_id" name="paitent_id" required  value="{{list.patient_id_id}}">
+      			<input type="text" class="form-control" value="{{list.patient_id}}" disabled="disabled">
+      		</div>
+    	</div>
+    	<div class="form-group">
+      		<label class="control-label col-sm-2">Details:</label>
+      		<div class="col-xs-3">   
+      			<textarea rows="10" cols="50" lass="form-control" id="details" placeholder="Enter details" name="details" required></textarea>       
+     		</div>
+    	</div>
+		
+    	<div class="form-group">        
+      		<div class="col-sm-offset-2 col-sm-10">
+        		<button type="submit" class="btn btn-default">Submit</button>
+      		</div>
+    	</div>
+   		<div class="form-group">        
+      		<div class="col-sm-offset-2 col-sm-10">
+      		
+        		
+      		</div>
+    	</div>
+  	</form>
+  	{%endfor%}
+    </div>
+ 
+	<div class="col-sm-2 sidenav">
+     </div>
+</div>
+
+	{% else %}
+		<h1>404 Page Not Found</h1>
+	{% endif %}
+{% else %}
+	<h1>Login First</h1>
+{% endif %}	
+</body>
+</html>
+{% endblock %}

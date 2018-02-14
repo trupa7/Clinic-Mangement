@@ -1,0 +1,71 @@
+{% extends 'login/base.html' %}
+
+<!DOCTYPE html>
+
+{% block content %} 
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Medicare Em dashboard</title>
+
+</head>
+<body>
+{% if userid and usertype and userspec %}
+	{% if 'RE' in usertype %}
+<div class="row content">
+    <div class="col-sm-2 sidenav">
+    </div>
+    <div class="col-sm-8 text-left" > 	
+			  <h2>Employees</h2>           
+			  <table class="table table-condensed">
+			    <thead>
+			      <tr>
+			        <th>Employee Name</th>
+			        <th>Username</th>
+			        <th>Password</th>
+			        <th>Speciality</th>
+			        <th>Occupation</th>
+			        
+			      </tr>
+			    </thead>
+			    <tbody>
+			      {% if employees_list %}
+			      {% for list in employees_list %}
+			      <tr>
+			      	<td>{{list.first_name}} | {{list.last_name}} </td>
+			        <td>{{list.username}}</td>
+			        <td>{{list.password}}</td>
+			        <td>{{list.speciality_label}}</td>
+			        {% if 'DO' in list.type_label %}
+			        	<td>Doctor</td>
+			        {% elif 'NU' in list.type_label %}
+			        	<td>Nurse</td>
+			        {% elif 'RE' in list.type_label %}
+			        	<td>Receptionist</td>
+			        {% elif 'PH' in list.type_label %}
+			        	<td>Pharmacist</td>
+			        {% elif 'LA' in list.type_label %}
+			        	<td>Lab Technician</td>
+			        {%else%}
+			        	<td>None</td>
+			        {%endif%}	
+			      </tr>
+			      {%endfor%}
+			       {% endif %}
+			    </tbody>
+			  </table>
+			
+ 	</div>
+	<div class="col-sm-2 sidenav">
+     </div>
+</div>
+
+	{% else %}
+		<h1>404 Page Not Found</h1>
+	{% endif %}
+{% else %}
+	<h1>Login First</h1>
+{% endif %}	
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'login/base.html' %}
+
+<!DOCTYPE html>
+
+{% block content %} 
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Medicare Add Lab</title>
+
+</head>
+<body>
+{% if userid and usertype and userspec %}
+	{% if 'DO' in usertype %}
+<div class="row content">
+    <div class="col-sm-2 sidenav">
+    </div>
+    <div class="col-sm-8 text-left" > 
+		<h2>Add new Lab</h2>
+        <form class="form-horizontal"  method="post" id="carform">
+       {% csrf_token %}
+       {% for field in record %}
+    	<div class="form-group">
+      		<label class="control-label col-sm-2" for="username">{{ field.label_tag }}</label>
+      		<div class="col-xs-3">
+        		{{field}}
+      		</div>
+    	</div>
+    	
+      {% endfor %}
+    	<div class="form-group">        
+      		<div class="col-sm-offset-2 col-sm-10">
+        		<button type="submit" class="btn btn-default">Submit</button>
+      		</div>
+    	</div>
+   		<div class="form-group">        
+      		<div class="col-sm-offset-2 col-sm-10">
+      		
+        		<b style="color: red">{{error}}</b>
+      		</div>
+    	</div>
+  	</form>
+    </div>
+ 
+	<div class="col-sm-2 sidenav">
+     </div>
+</div>
+
+	{% else %}
+		<h1>404 Page Not Found</h1>
+	{% endif %}
+{% else %}
+	<h1>Login First</h1>
+{% endif %}	
+</body>
+</html>
+{% endblock %}
