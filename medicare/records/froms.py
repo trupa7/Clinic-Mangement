@@ -1,6 +1,6 @@
 from django import forms
 
-from records.models import Patient, Appointment, History,Admit
+from records.models import Patient, Appointment, Admit
 
 # add a patient
 class NewPatientForm(forms.ModelForm):
@@ -22,13 +22,6 @@ class NewAppointmentForm(forms.ModelForm):
         model = Appointment
         fields = ('patient', 'appointment_date', 'appointment_time', 'visit_reason', 'doctor')
 
-# update patient history based on appointment
-class NewHistoryForm(forms.ModelForm):
-    prescribed = forms.CharField(max_length=150, required=False)
-
-    class Meta:
-        model = History
-        fields = ('appointment', 'prescription', 'prescribed', 'visit_record')
 
 class NewAdmitForm(forms.ModelForm):
 

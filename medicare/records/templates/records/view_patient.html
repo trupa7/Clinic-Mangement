@@ -1,0 +1,61 @@
+{% extends 'login/base.html' %}
+
+<!DOCTYPE html>
+
+{% block content %} 
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Medicare Patient Dashboard</title>
+
+
+</head>
+<body>
+{% if userid and usertype and userspec %}
+	{% if 'RE' in usertype %}
+<div class="row content">
+    <div class="col-sm-2 sidenav">
+    </div>
+    <div class="col-sm-8 text-left" > 	
+			  <h2>Patients</h2> 
+			  <table class="table table-condensed" id="myTable">
+			    <thead>
+			      <tr>
+			        <th>Patient Name</th>
+			        <th>sex</th>
+			        <th>email</th>
+			        <th>Phone</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      {% if patient_list %}
+			      {% for list in patient_list %}
+			      <tr>
+			      	<td><a href="{% url 'records:patient_details' list.id%}" >{{list.first_name}} |{{list.middle_name}} | {{list.last_name}}</a> </td>
+			        {% if 'm' in list.sex %}
+			        	<td>Male</td>
+			        {% else %}
+			        	<td>Female</td>
+			        {% endif %}
+			        <td>{{list.email}}</td>
+			        <td>{{list.day_phone}}</td>
+			      </tr>
+			      {%endfor%}
+			       {% endif %}
+			    </tbody>
+			  </table>
+			
+ 	</div>
+	<div class="col-sm-2 sidenav">
+     </div>
+</div>
+
+	{% else %}
+		<h1>404 Page Not aFound</h1>
+	{% endif %}
+{% else %}
+	<h1>Login First</h1>
+{% endif %}	
+</body>
+</html>
+{% endblock %}

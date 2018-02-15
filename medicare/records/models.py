@@ -44,20 +44,6 @@ class Patient(models.Model):
         return  '{}, {}'.format(self.last_name, self.first_name)
 
 
-class History(models.Model):
-    PRESCRIPTION = (
-        ('y', 'yes'),
-        ('n', 'no')
-    )
-    appointment = models.ForeignKey('Appointment', on_delete=models.CASCADE, )
-    prescription = models.CharField(max_length=1, choices=PRESCRIPTION,)
-    prescribed = models.CharField(max_length=150)
-    record_date = models.DateTimeField(auto_now=datetime)
-    visit_record = models.TextField()
-
-    def __str__(self):
-        return str(self.appointment)
-
 
 class Appointment(models.Model):
     DATE = [] # set days to select
