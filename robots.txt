@@ -1,0 +1,2 @@
+hospital managament system using DJango and mysql 
+
