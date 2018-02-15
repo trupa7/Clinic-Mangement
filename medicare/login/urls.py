@@ -19,6 +19,7 @@ from . import views
 app_name="login"
 urlpatterns = [
     path('', views.index, name='index'),
+    url(r'^about/$', views.about, name='about'),
     url(r'^login/$', views.login, name='login'),
     url(r'^logout/$', views.logout, name='logout'),
     url(r'^auth/$', views.auth_view, name='auth'),

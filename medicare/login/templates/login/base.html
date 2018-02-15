@@ -49,19 +49,18 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href=" {% url 'login:index' %}">Home</a></li>
-      <li><a href="#">about</a></li>
+      <li><a href="{% url 'login:about' %}">About us</a></li>
       {% if userid and usertype and userspec %}
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu<span class="caret"></span></a>
       <ul class="dropdown-menu">
       	  {% if 'RE' in usertype %}
        	  <li><a href=" {% url 'records:frontdesk' %}">Dashborad</a></li>
           <li><a href="{% url 'records:newpatient' %}">Add New Patient</a></li>
+          <li><a href="{% url 'records:viewpatient' %}">View Patients</a></li>
           <li><a href="{% url 'records:newappointment' %}">Add New Appointment</a></li>
           <li><a href="{% url 'records:cancelapp' %}">Cancel Appointment</a></li>
           {% elif 'DO' in usertype %}
           <li><a href="{% url 'doctors:appointments' %}">Dashboard</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
           {% elif 'NU' in usertype %}
           <li><a href=" {% url 'nurses:frontdesk' %}">Dashborad</a></li>
           {% elif 'PH' in usertype %}

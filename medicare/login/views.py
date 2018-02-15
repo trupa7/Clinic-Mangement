@@ -19,6 +19,16 @@ def index(request):
         request.session['usertype']=""
         request.session['userspec']=""
         return render(request, 'login/index.html', {"userid":request.session['userid'],"usertype":request.session['usertype'],"userspec":request.session['userspec']})
+
+def about(request):
+    try:
+        return render(request, 'login/about.html', {"userid":request.session['userid'],"usertype":request.session['usertype'],"userspec":request.session['userspec']})
+    except:
+        request.session['userid']=""
+        request.session['usertype']=""
+        request.session['userspec']=""
+        return render(request, 'login/about.html', {"userid":request.session['userid'],"usertype":request.session['usertype'],"userspec":request.session['userspec']})
+  
     
 
 def login(request):
@@ -46,8 +56,7 @@ def auth_view(request):
             return redirect('login:index')
         #return HttpResponseRedirect('')
     except Employee.DoesNotExist:
-        a=[]
-        a.append('INAVLID ID OR PASSWORD')
+       
         return render(request, 'login/login.html', {"error":'Invalid Input'})
     
     
