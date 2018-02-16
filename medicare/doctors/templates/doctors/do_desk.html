@@ -35,7 +35,7 @@
                 	<td><a href="{% url 'doctors:displayhistory' list.id%}">{{list.patient}}</a></td>
 	                <td>{{ list.visit_reason }}</td>
                     <td>{{ list.doctor }}</td>
-                	<td><a href="{% url 'doctors:updatehistory' list.id %}">Update</a> | <a href="{% url 'doctors:addlab' %}">Lab</a> | <a href="{% url 'doctors:cancelapp' list.id %}">Cancel</a></td>
+                	<td><a href="{% url 'doctors:updatehistory' list.id %}">Update</a> | <a href="{% url 'doctors:addlab' list.patient_id %}">Lab</a> | <a href="{% url 'doctors:addprescription' %}">Prescription</a>| <a href="{% url 'doctors:cancelapp' list.id %}">Cancel</a></td>
 	                
 			      </tr>
 			      {%endfor%}
@@ -50,7 +50,7 @@
 		             <th>Patient</th>
 		             <th>Visit reason</th>
 		             <th>Doctor's Name</th>
-		             <th>Action</th>
+		           
 			      </tr>
 			    </thead>
 			    <tbody>
@@ -61,8 +61,7 @@
                 	<td><a href="{% url 'doctors:displayhistory' list.id%}">{{list.patient}}</a></td>
 	                <td>{{ list.visit_reason }}</td>
                     <td>{{ list.doctor }}</td>
-                	<td><a href="{% url 'doctors:updatehistory' list.id %}">Complete</a> | <a href="#">Lab</a> | <a href="{% url 'doctors:cancelapp' list.id %}">Cancel</a></td>
-	                
+                	
 			      </tr>
 			      {%endfor%}
 			       {% endif %}

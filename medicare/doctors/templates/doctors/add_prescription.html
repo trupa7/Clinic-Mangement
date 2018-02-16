@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Medicare Add Lab</title>
+<title>Medicare Add Prescription</title>
 
 </head>
 <body>
@@ -16,12 +16,12 @@
     <div class="col-sm-2 sidenav">
     </div>
     <div class="col-sm-8 text-left" > 
-		<h2>Add new Lab</h2>
+		<h2>Add new Prescription</h2>
         <form class="form-horizontal"  method="post" id="carform">
        {% csrf_token %}
        {% for field in record %}
     	<div class="form-group">
-      		<label class="control-label col-sm-2">{{ field.label_tag }}</label>
+      		<label class="control-label col-sm-2" for="username">{{ field.label_tag }}</label>
       		<div class="col-xs-3">
         		{{field}}
       		</div>
