@@ -30,14 +30,16 @@
 			    <tbody>
 			      {% if todays_appointments %}
 			      {% for list in todays_appointments %}
-			      <tr>
-			      	<td>{{list.appointment_time}}</td>
-                	<td><a href="{% url 'doctors:displayhistory' list.id%}">{{list.patient}}</a></td>
-	                <td>{{ list.visit_reason }}</td>
-                    <td>{{ list.doctor }}</td>
-                	<td><a href="{% url 'doctors:updatehistory' list.id %}">Update</a> | <a href="{% url 'doctors:addlab' list.patient_id %}">Lab</a> | <a href="{% url 'doctors:addprescription' %}">Prescription</a>| <a href="{% url 'doctors:cancelapp' list.id %}">Cancel</a></td>
-	                
-			      </tr>
+			      	
+				      <tr>
+				      	<td>{{list.appointment_time}}</td>
+	                	<td><a href="{% url 'records:patient_details' list.patient_id%}">{{list.patient}}</a></td>
+		                <td>{{ list.visit_reason }}</td>
+	                    <td>{{ list.doctor }}</td>
+	                	<td><a href="{% url 'doctors:updatehistory' list.id %}">Update</a> | <a href="{% url 'doctors:addlab' list.patient_id %}">Lab</a> | <a href="{% url 'doctors:addprescription' list.patient_id %}">Prescription</a>| <a href="{% url 'doctors:cancelapp' list.id %}">Cancel</a></td>
+		                
+				      </tr>
+				     
 			      {%endfor%}
 			       {% endif %}
 			    </tbody>
@@ -54,15 +56,20 @@
 			      </tr>
 			    </thead>
 			    <tbody>
+			    
+			    
 			      {% if future_appointments %}
 			      {% for list in future_appointments %}
-			      <tr>
-			      	<td>{{list.appointment_time}}</td>
-                	<td><a href="{% url 'doctors:displayhistory' list.id%}">{{list.patient}}</a></td>
-	                <td>{{ list.visit_reason }}</td>
-                    <td>{{ list.doctor }}</td>
-                	
-			      </tr>
+			     
+			      
+				      <tr>
+				      	<td>{{list.appointment_time}}</td>
+	                	<td><a href="{% url 'doctors:displayhistory' list.id%}">{{list.patient}}</a></td>
+		                <td>{{ list.visit_reason }}</td>
+	                    <td>{{ list.doctor }}</td>
+	                	
+				      </tr>
+				   
 			      {%endfor%}
 			       {% endif %}
 			    </tbody>

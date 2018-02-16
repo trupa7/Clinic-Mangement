@@ -17,5 +17,5 @@ urlpatterns = [
     path('updatehistory/<appointment_id>/', views.update_history, name='updatehistory'),
     path('displayhistory/<appointment_id>/', views.display_history, name='displayhistory'),
     path('addlab/<int:id>', views.new_lab, name='addlab'),
-    path('addprescription/', views.new_prescription, name='addprescription'),
+    path('addprescription/<int:id>', views.new_prescription, name='addprescription'),
 ]

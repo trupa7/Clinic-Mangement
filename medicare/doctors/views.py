@@ -27,7 +27,7 @@ def cancel_appointment(request, appointment_id):
 
 
 def appointments(request):
-    appointments = list(Appointment.objects.all())
+    appointments = list(Appointment.objects.filter(doctor=request.session['for_id']))
   
     history = list(History.objects.all())
     todays_appointments = []
@@ -107,15 +107,17 @@ def update_history(request, appointment_id):
 def new_lab(request,id):
     if request.method == 'POST':
         form = AddTestSelect(request.POST)
+      
         if form.is_valid():
             record = form.save(commit=False)
             record.save()
             return redirect('doctors:appointments')
     else:
         form = AddTestSelect()
-    return render(request, 'doctors/add_lab.html', {'patient_id':id,'record': form,"userid":request.session['userid'],"usertype":request.session['usertype'],"userspec":request.session['userspec']})
+    
+    return render(request, 'doctors/add_lab.html', {'patient_id':id,'doctor_id':request.session['for_id'],'record': form,"userid":request.session['userid'],"usertype":request.session['usertype'],"userspec":request.session['userspec']})
 
-def new_prescription(request):
+def new_prescription(request,id):
     
     if request.method == 'POST':
         prescription = request.POST.get('prescribedBy', None)
@@ -131,6 +133,7 @@ def new_prescription(request):
             return redirect('doctors:appointments')
     else:
         form = NewPrescription()
-    return render(request, 'doctors/add_prescription.html', {'record': form,"userid":request.session['userid'],"usertype":request.session['usertype'],"userspec":request.session['userspec']})
+        print(form)
+    return render(request, 'doctors/add_prescription.html', {'patient_id':id,'doctor_id':request.session['for_id'],'record': form,"userid":request.session['userid'],"usertype":request.session['usertype'],"userspec":request.session['userspec']})
 
 
