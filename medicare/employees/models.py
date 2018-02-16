@@ -28,5 +28,19 @@ class Employee(models.Model):
     
     def getSpec(self):
         return self.speciality_label
-        
+    
+#   def getDoctor(self):
+#        if 'DO' in self.type_label:
+#            return self.username
+#         
 
+
+class Doctor(models.Model):
+
+    username=models.CharField(max_length=200)
+
+    
+    def __str__(self):
+        return self.username
+    
+   

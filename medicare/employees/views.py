@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from employees.forms import NewEmployeeForm
-from employees.models import Employee
+from employees.models import Employee,Doctor
 from records.models import Appointment
+from django.forms.forms import Form
 
 
 def employees(request):
@@ -14,10 +15,15 @@ def employees(request):
 
 def new_employee(request):
     if request.method == 'POST':
+        user_id=request.POST['username']
+        user_type=request.POST['type_label']
         form = NewEmployeeForm(request.POST)
         if form.is_valid():
             record = form.save(commit=False)
             record.save()
+            if 'DO' in user_type:
+                Doctor(username=user_id).save()
+
             return redirect('employees:frontdesk')
     else:
         form = NewEmployeeForm()
