@@ -23,8 +23,10 @@ def new_employee(request):
             record.save()
             if 'DO' in user_type:
                 Doctor(username=user_id).save()
-
             return redirect('employees:frontdesk')
+        else:
+            return render(request, 'employees/add_employee.html', {'record': form,"userid":request.session['userid'],"usertype":request.session['usertype'],"userspec":request.session['userspec'],'error':"Username is Taken"})
+
     else:
         form = NewEmployeeForm()
 

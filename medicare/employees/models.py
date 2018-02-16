@@ -14,7 +14,7 @@ class Employee(models.Model):
 
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    username=models.CharField(max_length=200)
+    username=models.CharField(max_length=200,unique=True)
     password=models.CharField(max_length=200)
     type_label=models.CharField(max_length=200,choices=SL)
     speciality_label=models.CharField(max_length=200)

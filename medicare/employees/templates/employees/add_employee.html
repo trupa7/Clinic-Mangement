@@ -16,7 +16,7 @@
     <div class="col-sm-2 sidenav">
     </div>
     <div class="col-sm-8 text-left" > 
-		<h2>Add new Employee</h2>
+		<h2>New Employee</h2>
         <form class="form-horizontal"  method="post" id="carform">
        {% csrf_token %}
        {% for field in record %}
@@ -33,16 +33,18 @@
         		<button type="submit" class="btn btn-default">Submit</button>
       		</div>
     	</div>
-   		<div class="form-group">        
+   		<div class="form-group">   
+   		     
       		<div class="col-sm-offset-2 col-sm-10">
       		
-        		
+        		<b style="color: red">{{error}}</b>
       		</div>
     	</div>
   	</form>
     </div>
  
 	<div class="col-sm-2 sidenav">
+	
      </div>
 </div>
 
