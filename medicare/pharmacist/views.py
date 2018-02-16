@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Pharmacist,Prescription
 # Create your views here.
 def getAllDetails(request):
@@ -11,8 +11,8 @@ def getPrescriptionData(request,id):
    
 # delete data when prescription is given
 def deletefromTable(request,id):
-    print("inside")
-    Prescription.objects.filter(prescribedBy=id).delete()
-    Pharmacist.objects.filter(id=id).delete()
-    return render(request, 'pharmacy:view-patient-prescriptions', {})
+ 
+    #Prescription.objects.filter(prescribedBy=id).delete()
+    Pharmacist.objects.filter(prescription_id_id=id).delete()
+    return redirect('pharmacy:view-patient-prescriptions')
 
