@@ -14,7 +14,7 @@ class Laboratory(models.Model):
     test_date = models.DateTimeField(default = timezone.now)
     test_details = models.TextField(null=True)
     result_status = models.CharField(max_length=10,choices=STATUS,null=True)
-    doctor_id = models.ForeignKey('employees.Employee', on_delete=models.CASCADE)
+    doctor_id = models.ForeignKey('employees.Doctor', on_delete=models.CASCADE)
 
     def get_pID(self):
         return self.patient_id_id
