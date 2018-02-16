@@ -29,7 +29,7 @@
 			      {% if admit_list %}
 			      {% for list in admit_list %}
 			      <tr>
-			      	<td>{{list.patient_id}}</td>
+			      	<td><a href="{% url 'records:patient_details' list.patient_id_id %}">{{ list.patient_id}}</a> </td>
 			        <td>{{list.Room_id}}</td>
 			        <td><a href="{% url 'nurses:newhistory' list.patient_id_id %}">view history</a> | <a href="{% url 'nurses:addfollowups' list.patient_id_id %}">Add Follow ups</a></td>
 			      </tr>
