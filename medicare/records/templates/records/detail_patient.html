@@ -11,23 +11,33 @@
 </head>
 <body>
 {% if userid and usertype and userspec %}
-	{% if 'RE' in usertype %}
+	{% if 'RE' in usertype or 'NU' in usertype or 'DO' in usertype %}
 <div class="row content">
     <div class="col-sm-2 sidenav">
     </div>
     <div class="col-sm-8 text-left" > 	
 			  <h3>Appointment History
 			  <ul class="nav navbar-nav navbar-right">
+			  {% if 'RE' in usertype %}
    			  	<li class="dropdown"> <a  href=" {%  url 'records:viewpatient' %}"><span class="glyphicon glyphicon-log-in"></span> Back</a> </li>
-   				</ul> </h3>Patient Name:{{ name }}           
+   			  {% elif 'NU' in usertype %}
+   			  <li class="dropdown"> <a  href=" {%  url 'nurses:frontdesk' %}"><span class="glyphicon glyphicon-log-in"></span> Back</a> </li>
+   			  {% elif 'DO' in usertype %}
+   			  <li class="dropdown"> <a  href=" {%  url 'doctors:appointments' %}"><span class="glyphicon glyphicon-log-in"></span> Back</a> </li>
+   			 
+   			  {%endif%}
+   				</ul>
+   				 </h3>Patient Name:{{ name }}           
 			  <table class="table table-condensed">
 			    <thead>
 			      <tr>
-			        <th>date</th>
-		            <th>time</th>
-		            <th>prescription</th>
-		            <th>prescribed</th>
-		            <th>visit record</th>
+			        <th>Date</th>
+		            <th>Time</th>
+					  {% if 'DO' in usertype %}
+		            <th>Prescription</th>
+		            <th>Prescribed</th>
+		            <th>Visit Record</th>
+					  {% endif %}
 			      </tr>
 			    </thead>
 			    <tbody>
@@ -36,16 +46,19 @@
 			      <tr>
 			      	<td>{{ list.appointment.appointment_date }}</td>
                     <td>{{ list.appointment.appointment_time }}</td>
+					  {% if 'DO' in usertype %}
                     <td>{{ list.prescription }}</td>
                     <td>{{ list.prescribed }}</td>
                     <td>{{ list.visit_record }}</td>
+					  {% endif %}
 
 			      </tr>
 			      {%endfor%}
 			       {% endif %}
 			    </tbody>
 			  </table>
-				  <h3>Medicine History</h3>        
+			  {% if 'DO' in usertype or 'NU' in usertype %}
+				  <h3>Medicine History</h3>
 			  <table class="table table-condensed">
 			    <thead>
 			      <tr>
@@ -54,6 +67,7 @@
                	 	 <th> Drug Name </th>
                      <th> Prescribed Date </th>
                      <th> Prescribed By </th>
+					 
 			      </tr>
 			    </thead>
 			    <tbody>
@@ -70,12 +84,15 @@
 			       {% endif %}
 			    </tbody>
 			  </table>
+			   {% endif %}
 			  <h3>Lab History</h3>   
 			  <table class="table table-condensed">
 			    <thead>
 			      <tr>
 			      	<th>Test id</th>
+					  {% if 'DO' in usertype %}
 			        <th>Test Details</th>
+					  {% endif %}
 			       	<th> Tested On </th>
             		<th> Doctor ID </th>
             		<th> Status </th>
@@ -87,7 +104,9 @@
 			      {% for list in lab_data %}
 			      <tr>
 			      	<td>{{list.test_id}}</td>
+					  {% if 'DO' in usertype %}
 			      	<td>{{list.test_details}}</td>
+					  {% endif %}
 			      	<td>{{list.test_date}}</td>
 			      	<td>{{list.doctor_id}}</td>
 			      	<td>{{list.result_status}}</td>
