@@ -45,31 +45,36 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="{% url 'login:index' %}">Medicare</a>
+      	{% if 'RE' in usertype %}
+        <a class="navbar-brand" href=" {% url 'records:frontdesk' %}">Medicare</a>
+        {% elif 'DO' in usertype %}
+        <a class="navbar-brand" href="{% url 'doctors:appointments' %}">Medicare</a>
+        {% elif 'NU' in usertype %}
+        <a class="navbar-brand" href=" {% url 'nurses:frontdesk' %}">Medicare</a>
+        {% elif 'PH' in usertype %}
+        <a class="navbar-brand" href="{% url 'pharmacy:view-patient-prescriptions' %}">Medicare</a>
+        {% elif 'LA' in usertype %}
+        <a class="navbar-brand" href="{% url 'lab:view-patient-tests' %}">Medicare</a>
+        {% else %}
+        <a class="navbar-brand" href="{% url 'login:index' %}">Medicare</a>
+        {% endif %}
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href=" {% url 'login:index' %}">Home</a></li>
-      <li><a href="{% url 'login:about' %}">About us</a></li>
+     
+      
       {% if userid and usertype and userspec %}
+      {% if 'RE' in usertype %}
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu<span class="caret"></span></a>
       <ul class="dropdown-menu">
-      	  {% if 'RE' in usertype %}
-       	  <li><a href=" {% url 'records:frontdesk' %}">Dashborad</a></li>
+      	
           <li><a href="{% url 'records:newpatient' %}">Add New Patient</a></li>
           <li><a href="{% url 'records:viewpatient' %}">View Patients</a></li>
           <li><a href="{% url 'records:newappointment' %}">Add New Appointment</a></li>
           <li><a href="{% url 'records:cancelapp' %}">Cancel Appointment</a></li>
-          {% elif 'DO' in usertype %}
-          <li><a href="{% url 'doctors:appointments' %}">Dashboard</a></li>
-          {% elif 'NU' in usertype %}
-          <li><a href=" {% url 'nurses:frontdesk' %}">Dashborad</a></li>
-          {% elif 'PH' in usertype %}
-          <li><a href="{% url 'pharmacy:view-patient-prescriptions' %}">Dashboard</a></li>
-          {% elif 'LA' in usertype %}
-          <li><a href="{% url 'lab:view-patient-tests' %}">Dashboard</a></li>
-      	  {% endif %}
+      	
       </ul>
       </li>
+       {% endif %}
        {% if 'RE' in usertype %}
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">User<span class="caret"></span></a>
       <ul class="dropdown-menu">
@@ -90,6 +95,7 @@
       {% endif %}
     </ul>
     <ul class="nav navbar-nav navbar-right">
+    <li><a href="{% url 'login:about' %}">About us</a></li>
     {% if userid and usertype and userspec %}
     	<li class="dropdown"> <a  href=" {% url 'login:logout' %}"><span class="glyphicon glyphicon-log-in"></span> Logout | {{userid}}</a> </li>
     {% else %}
