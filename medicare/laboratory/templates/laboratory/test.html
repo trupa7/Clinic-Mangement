@@ -17,6 +17,7 @@
     </div>
     <div class="col-sm-8 text-left" > 
 		<h2>Update Test</h2>
+		<hr>
         <form class="form-horizontal" action="{% url 'lab:test_update' %}"" method="post" id="carform">
        {% csrf_token %}
        {% if data %}
@@ -28,7 +29,7 @@
       		</div>
     	</div>
     	<div class="form-group">
-      		<label class="control-label col-sm-2" for="test_id">Test id:</label>
+      		<label class="control-label col-sm-2 " for="test_id">Test id:</label>
       		<div class="col-xs-3">
         		<input type="text" class="form-control" id="test_id"  name="test_id" value="{{list.test_id}}" disabled="disabled">
       		</div>
