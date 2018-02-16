@@ -16,26 +16,35 @@
     <div class="col-sm-2 sidenav">
     </div>
     <div class="col-sm-8 text-left" > 
-		<h2>Cancel Appointment</h2>
+		<h2 align="center">Cancel Appointment</h2>
+		<hr>
         <form class="form-horizontal"  action="{% url 'records:cancelapp' %}" method="get" id="carform">
        {% csrf_token %}
-       
-    
-      <div class="form-group">
-      		<label class="control-label col-sm-2" for="patient">Select list (select one):</label>
-      		<div class="col-xs-3">
-	      		<select class="form-control" id="patient" form="carform" name="patient">
-	      		{% for field in appointments %}
-	      		<option value="{{field}}">{{field}}</option>
-	        	 {% endfor %}
-	      		</select>
-      		</div>
-      	</div>
-     
-    	<div class="form-group">        
-      		<div class="col-sm-offset-2 col-sm-10">
-        		<button type="submit" class="btn btn-default">Submit</button>
-      		</div>
+  
+    	<div class="row">
+				<div class="col-xs-4 col-sm-4 col-md-4"></div>
+				<div class="form-group input-group col-xs-4 col-sm-4 col-md-4">
+            		<span class="input-group-addon ">select</span>
+            		<b class="input-group-addon">
+            		<select  id="patient" form="carform" name="patient">
+		      		{% for field in appointments %}
+		      		<option value="{{field}}">{{field}}</option>
+		        	 {% endfor %}
+		      		</select>
+					</b>
+            	</div>
+				<div class="col-xs-4 col-sm-4 col-md-4"></div>
+		</div>
+		
+    	<div class="form-group">
+			<div class="row">
+				<div class="col-xs-4 col-sm-4 col-md-4"></div>
+				<div class="form-group input-group col-xs-4 col-sm-4 col-md-4">
+					Sure you want to Cancel?
+            		<button type="submit" class="btn btn-default">submit</button>	
+            	</div>
+				<div class="col-xs-4 col-sm-4 col-md-4"></div>
+			</div>
     	</div>
    		<div class="form-group">        
       		<div class="col-sm-offset-2 col-sm-10">

@@ -7,15 +7,23 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Medicare appointment history</title>
-
+<script>
+    function printDiv() {
+        var divToPrint = document.getElementById('areaToPrint');
+        newWin = window.open("");
+        newWin.document.write(divToPrint.outerHTML);
+        newWin.print();
+        newWin.close();
+   }
+</script>
 </head>
 <body>
 {% if userid and usertype and userspec %}
 	{% if 'RE' in usertype or 'NU' in usertype or 'DO' in usertype %}
-<div class="row content">
+<div class="row content" > 
     <div class="col-sm-2 sidenav">
     </div>
-    <div class="col-sm-8 text-left" > 	
+    <div class="col-sm-8 text-left" id="areaToPrint"> 	
 			  <h3>Appointment History
 			  <ul class="nav navbar-nav navbar-right">
 			  {% if 'RE' in usertype %}
@@ -26,8 +34,10 @@
    			  <li class="dropdown"> <a  href=" {%  url 'doctors:appointments' %}"><span class="glyphicon glyphicon-log-in"></span> Back</a> </li>
    			 
    			  {%endif%}
+   			  
    				</ul>
-   				 </h3>Patient Name:{{ name }}           
+   				
+   				</h3>Patient Name:{{ name }}  <button onclick="printDiv()">Print Report</button>         
 			  <table class="table table-condensed">
 			    <thead>
 			      <tr>
