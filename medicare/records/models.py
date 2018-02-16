@@ -1,7 +1,7 @@
 from datetime import date, datetime, time, timedelta
 from django.db import models
 from pymongo.read_preferences import Primary
-
+from employees.models import Employee 
 
 # Create your models here.
 
@@ -55,12 +55,14 @@ class Appointment(models.Model):
     for i in range(19):
         dt = datetime.combine(date.today(), time(8, 0)) + timedelta(minutes=(30*i))
         TIME.append((dt.time(),str(dt.time())))
+    
 
+    
     patient = models.ForeignKey('Patient', on_delete=models.CASCADE)
     appointment_date = models.DateField(choices=DATE)
     appointment_time = models.TimeField(choices=TIME)
     visit_reason = models.CharField(max_length=150)
-    doctor = models.ForeignKey('employees.Employee', on_delete=models.CASCADE, default='none')
+    doctor = models.ForeignKey('employees.Doctor', on_delete=models.CASCADE, default='none',related_name='DO')
 
     class Meta:
         # cant make multiple appointments for same date and time
