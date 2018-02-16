@@ -1,0 +1,8 @@
+first create database in mysql with given database file
+then import project in eclipse
+delete all migrations file
+then make migrations
+migrate 
+and run
+
+create super user
