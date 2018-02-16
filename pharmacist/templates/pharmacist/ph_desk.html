@@ -1,0 +1,59 @@
+{% extends 'login/base.html' %}
+
+<!DOCTYPE html>
+
+{% block content %} 
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Medicare Ph Dashboard</title>
+
+</head>
+<body>
+{% if userid and usertype and userspec %}
+	{% if 'PH' in usertype %}
+<div class="row content">
+    <div class="col-sm-2 sidenav">
+    </div>
+    <div class="col-sm-8 text-left" > 	
+			  <h2>Orders View</h2>           
+			  <table class="table table-condensed">
+			    <thead>
+			      <tr>
+			         <th> ID </th>
+                	 <th> Doctor Name </th>
+                     <th> Prescription ID </th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      {% if data %}
+			      {% for list in data %}
+			      <tr>
+			      	<td>{{list.id}}</td>
+                	<td>{{list.name}}</td>
+	                <td><a href="{% url 'pharmacy:pres_detail' list.prescription_id_id%}">{{list.prescription_id_id}}</a></td>
+	                <td><form method="post" action="{% url 'pharmacy:del_detail' list.prescription_id_id%}">
+                    {%csrf_token%}
+                    <td><input type="submit" name="button"  value="Complete order"></td>
+                </form></td>
+	                
+			      </tr>
+			      {%endfor%}
+			       {% endif %}
+			    </tbody>
+			  </table>
+			
+ 	</div>
+	<div class="col-sm-2 sidenav">
+     </div>
+</div>
+
+	{% else %}
+		<h1>404 Page Not Found</h1>
+	{% endif %}
+{% else %}
+	<h1>Login First</h1>
+{% endif %}	
+</body>
+</html>
+{% endblock %}
