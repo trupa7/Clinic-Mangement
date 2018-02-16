@@ -16,11 +16,8 @@
     <div class="col-sm-2 sidenav">
     </div>
     <div class="col-sm-8 text-left" > 
-		<h2>Add Follow ups
-		<ul class="nav navbar-nav navbar-right">
-   			  	<li class="dropdown"> <a  href=" {%  url 'nurses:frontdesk' %}"><span class="glyphicon glyphicon-log-in"></span> Back</a> </li>
-   		</ul>
-        </h2>
+		<h2>Add Follow up</h2>
+        <hr>
 		 {% for list in patient_name%}
         <form class="form-horizontal" action="{% url 'nurses:authfollowup' %}" method="POST" id="carform">
       	 {% csrf_token %}
